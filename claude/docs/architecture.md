@@ -21,12 +21,14 @@ _includes/
   toc.html facts.html card.html related.html date-fr.html icon.html
   list-rows.html list-gallery.html list-references.html universe-nav.html
   features.html rack.html signal-chain.html install.html     ← content blocks
+  terminal.html shots.html                                   ← content blocks
   visual-dsp.html visual-stacks.html visual-horn.html visual-book.html  ← hero visuals
 _son/ _logiciel/ _motion/ _others/     one collection per universe (articles)
 son/ logiciel/ motion/ web/ others/    index.md of each universe (layout: universe)
 index.md  404.html  robots.txt  CNAME  favicon.ico
 assets/css/main.css    all styles (tokens per universe, see design.md)
 assets/img/            favicon.svg, favicon-32.png, apple-touch-icon.png, logo.png, og/*.png
+assets/img/<project>/  a project's own images (meredsp206/: icon, screenshots)
 scripts/make-images.sh regenerates favicon/logo/og images (ImageMagick)
 Gemfile Makefile .claude/launch.json   local preview tooling
 ```
@@ -56,6 +58,9 @@ Excluded from the build: `CLAUDE.md`, `claude/`, `design/`, `scripts/`,
 | `description` | Meta description and card text (140–160 chars) |
 | `lede` | Hero paragraph (defaults to `description`) |
 | `kicker` | Small label above the title |
+| `app_icon` | `{src, alt}`: a software project's icon, shown above the kicker (96 px box) |
+| `version` | Shown as `v…` in the hero meta line |
+| `image` | Social card, when the project has its own (default: the universe's) |
 | `date`, `order` | Publication date (latest list) and order inside the universe |
 | `status` | e.g. "En cours", shown on cards |
 | `hero_visual` | `dsp`, `stacks`, `horn`, `book` → `_includes/visual-<name>.html` |
@@ -70,6 +75,17 @@ Excluded from the build: `CLAUDE.md`, `claude/`, `design/`, `scripts/`,
 Any other key can feed a content include, e.g. `features`, `rack`, `chain`,
 `install`, used in the Markdown as `{% include features.html items=page.features %}`.
 
+- `install`: cards `{id, name, formats, url, note, primary}`; `id` is the
+  anchor the hero buttons point to.
+- `terminals`: named lists of shell lines →
+  `{% include terminal.html commands=page.terminals.linux_build %}`. The `$`
+  prompt is not selectable; a line starting with `#` is a comment.
+- `shots`: named screenshots `{src, w, h, alt, caption, kind}` (`kind`:
+  `phone`, the default, or `desktop`) →
+  `{% include shots.html names="linux-mixer,console" %}` for a row, or
+  `names="console" side=true` to float one phone beside the text (stacked
+  under 720 px). Each image links to its full-size file.
+
 ## Markdown conventions
 
 - `## Title {#id}` — numbered automatically (CSS counter) and listed in the TOC.
@@ -77,6 +93,9 @@ Any other key can feed a content include, e.g. `features`, `rack`, `chain`,
 - `<aside class="callout" markdown="1">` with a first line `Title {: .callout-title}`.
 - `Text {: .note}` for a disclaimer box; `1. … {: .numbered}` for a numbered list.
 - `<div class="lang-en" lang="en" markdown="1">` for an English summary.
+- `<kbd>Ctrl</kbd> + <kbd>Z</kbd>` for keyboard shortcuts.
+- `### Title {#id}` sub-sections are not in the TOC; use them inside a long
+  `##` section (e.g. one per settings block of a screen).
 - Keep YAML flow mappings quoted when the value contains a comma.
 
 ## SEO plumbing
@@ -87,4 +106,5 @@ Any other key can feed a content include, e.g. `features`, `rack`, `chain`,
 - `_includes/schema.html` adds Person (hub), BreadcrumbList, and the article
   entity from `schema:`.
 - Default social image per universe via `_config.yml` defaults; site-wide
-  default `assets/img/og/studio.png`.
+  default `assets/img/og/studio.png`. A project with its own icon can have its
+  own card (`image:` front matter, `project_card` in `scripts/make-images.sh`).

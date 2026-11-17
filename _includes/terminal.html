@@ -1,0 +1,7 @@
+{%- comment -%}
+  Terminal block. commands: list of shell lines. A line starting with "#" is
+  shown as a comment, without prompt. The "$ " prompt is not selectable, so a
+  copy-paste gives runnable commands.
+{%- endcomment -%}
+<pre class="terminal"><code>{% for cmd in include.commands %}{% assign first = cmd | slice: 0 %}{% if first == "#" %}<span class="comment">{{ cmd | xml_escape }}</span>{% else %}<span class="prompt" aria-hidden="true">$ </span>{{ cmd | xml_escape }}{% endif %}
+{% endfor %}</code></pre>

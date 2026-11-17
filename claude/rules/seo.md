@@ -14,6 +14,10 @@
 - Images: meaningful `alt` in French, explicit `width`/`height`,
   `loading="lazy"` below the fold, WebP or optimised JPEG/PNG under ~300 KB.
   Each universe has a default social image in `assets/img/og/`.
+- Screenshots: real captures only (demo mode is fine), WebP at about twice the
+  displayed width (600 px phones, 1600 px desktop windows), phone status and
+  navigation bars cropped out, in `assets/img/<project>/`, through
+  `shots.html`.
 - Link between projects whenever it is natural (`related:` front matter and in
   the text). Cross-list a project in a second universe with `also_in:`.
 - Keep the site fast: one CSS file, no JS framework, fonts with

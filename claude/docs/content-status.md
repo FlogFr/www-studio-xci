@@ -6,7 +6,7 @@
 |-----|--------|---------|
 | `/` | live | — |
 | `/son/` | live | — |
-| `/son/meredsp206/` | live, no download yet | licence, source repo URL, version, tech stack, connection (USB / network), packages (.deb / AppImage / Flatpak / APK / F-Droid / Play), install commands, Linux + Android screenshots, roadmap, bug/contact channel |
+| `/son/meredsp206/` | live, full user guide (v0.1.0) | licence, bug/contact channel, packaged downloads (.deb / Flatpak / Play Store link once published), French-language Android screenshots |
 | `/son/sound-system/` | live | photo of the two stacks, anecdote of how/when it was acquired, current crossover frequencies and slopes |
 | `/son/pavillon-directivite-constante/` | live, project in progress | compression driver choice, final crossover, simulations, prototype photos, polar measurements |
 | `/logiciel/` | live | free-software / Linux / infra projects to list |
@@ -20,7 +20,10 @@
 
 ## Open questions for Florian
 
-1. MereDSP206: is it already downloadable? Where (GitHub, F-Droid, Play)? Licence?
+1. MereDSP206: which licence? Where should users report bugs (GitHub issues,
+   e-mail)? Has the Android app been tried on the real unit yet (the page only
+   says the protocol was tested on Florian's unit)? Link the Play Store page
+   once published.
 2. "Mere pour Ardour 9" (VST / LV2) appears in the MereDSP206 mockup as a
    related article: is it a real project to document in I Son?
 3. IV Web: did you build infratelier.com, theartofkubernetes.com and
@@ -39,6 +42,14 @@
   L15-554K, 2 × Eminence ME-12/300, JBL 2482, 2 × Celestion HF50, rack: DSP 206,
   Crest CPX 2600, 2 × Ecler APA1000, Inter-M M700 spare, `sonorisation.dsp206.rst`),
   book chapters and facts.
+- MereDSP206 repository (https://github.com/FlogFr/meredsp206: README,
+  `claude/docs/*.md`, GTK and Android source, `strings.xml` for the French UI
+  labels) — every feature, range, command, requirement and install step on the
+  page. Version 0.1.0 from `Cargo.toml` / `build.gradle.kts`. Requirement
+  "GTK 4.14 + libadwaita 1.6" from the `gtk4` / `libadwaita` crate features.
+- MereDSP206 screenshots — Android: five captures supplied by Florian (demo
+  mode / offline, English UI); Linux: captured from the GTK app's demo mode
+  (see deployment.md). Icon: `android/store/icon-512.png` of the repository.
 - theartofkubernetes.com — 350 pages, Kindle, Amazon.fr link, free chapter,
   English edition in progress.
 - infratelier.com — Infratelier SASU, Nantes, tagline, trainings.

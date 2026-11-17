@@ -7,6 +7,9 @@ layout: default
 <article class="article">
   <header class="wrap article-hero{% if page.hero_visual %} hero-{{ hero }}{% endif %}">
     <div class="hero-text">
+      {%- if page.app_icon %}
+      <img class="app-icon" src="{{ page.app_icon.src | relative_url }}" alt="{{ page.app_icon.alt | escape }}" width="96" height="96">
+      {%- endif %}
       {%- if page.kicker %}
       <p class="kicker">{{ page.kicker }}</p>
       {%- endif %}

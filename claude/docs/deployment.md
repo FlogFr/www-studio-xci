@@ -39,6 +39,22 @@ server for the browser pane (config changes need a restart).
 
 ## Images
 
-`scripts/make-images.sh` regenerates `favicon.ico`, the PNG icons, the logo and
-the six Open Graph cards (`assets/img/og/`) with ImageMagick. Run it after a
-change of universe name, tagline or colour.
+`scripts/make-images.sh` regenerates `favicon.ico`, the PNG icons, the logo,
+the six universe Open Graph cards and the project cards (`project_card`, e.g.
+`og/meredsp206.png` built from the project's icon) in `assets/img/og/` with
+ImageMagick. Run it after a change of universe name, tagline or colour. The
+fonts default to DejaVu / JetBrains Mono paths; override `FONT_*` when they
+live elsewhere (the existing cards use DejaVu Sans Bold for the titles).
+
+### MereDSP206 screenshots
+
+- Android: captures from the phone (900 × 2000), cropped to remove the status
+  bar and the system navigation bar (`-crop 900x1808+0+88`), resized to 600 px
+  wide WebP (`-quality 82`) → `assets/img/meredsp206/android-*.webp`.
+- Linux: build the GTK app (`cargo build --release -p dsp206-gtk`, needs GTK
+  4.14 and libadwaita 1.6, e.g. Debian 13 or Ubuntu 26.04 in a container), run
+  it under Xvfb with `fonts-adwaita-sans`, `gtk-font-name=Adwaita Sans 11` in
+  `~/.config/gtk-4.0/settings.ini` and `ADW_DEBUG_COLOR_SCHEME=prefer-dark`:
+  `meredsp206 --demo --page mixer` (or `--page channel --channel out1`). Wait
+  ~12 s for the start-up toast to go, grab the 1781 × 900 window with
+  `import -window root` + crop, resize to 1600 px wide WebP (`-quality 85`).

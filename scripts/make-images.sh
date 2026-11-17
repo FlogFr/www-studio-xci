@@ -2,6 +2,7 @@
 # Regenerates the raster brand images with ImageMagick:
 #   favicon.ico, assets/img/favicon-32.png, apple-touch-icon.png, logo.png
 #   assets/img/og/<universe>.png  (1200×630 social cards)
+#   assets/img/og/<project>.png   (project cards built from a project's icon)
 # Fonts default to DejaVu / JetBrains Mono system files; override with
 # FONT_BOLD, FONT_COND, FONT_SERIF, FONT_MONO.
 set -euo pipefail
@@ -46,5 +47,25 @@ card logiciel '#ffffff' '#0f172a' '#64748b' '#2448c9' "$FONT_MONO"  'II'  'LOGIC
 card motion   '#0d0b14' '#f4f0ff' '#9c93b5' '#ff4d8d' "$FONT_BOLD"  'III' 'MOTION'   'Blender, 2D, 3D'
 card web      '#f5efe4' '#1b1a17' '#6b655b' '#c2410c' "$FONT_SERIF" 'IV'  'WEB'      'Sites et références'
 card others   '#e6eeec' '#0b2a2f' '#4c6669' '#0a6e65' "$FONT_BOLD"  'V'   'OTHERS'   'Shape, composites…'
+
+# Project card in the I · Son colours, with the project's own icon:
+# id icon title tagline
+project_card() {
+  local id=$1 icon=$2 title=$3 tagline=$4 tmp
+  tmp=$(mktemp --suffix=.png)
+  convert "$icon" -alpha set -resize 280x280 \
+    \( -size 280x280 xc:none -fill white -draw 'roundrectangle 0,0,279,279,62,62' \) \
+    -compose DstIn -composite "$tmp"
+  convert -size 1200x630 xc:'#121212' "$tmp" -geometry +80+150 -composite \
+    -fill '#ededed' -font "$FONT_COND" -pointsize 84 -gravity northwest -annotate +420+200 "$title" \
+    -fill '#ffb000' -font "$FONT_MONO" -pointsize 30 -annotate +424+318 "$tagline" \
+    -fill '#a4a4a4' -font "$FONT_MONO" -pointsize 26 -annotate +70+56 'studio-xci.fr · I — Son' \
+    -fill none -stroke '#ededed' -strokewidth 3 -draw 'rectangle 1030,520 1130,574' \
+    -stroke none -fill '#ededed' -font "$FONT_MONO" -pointsize 30 -gravity southeast -annotate +86+64 'XCI' \
+    "assets/img/og/$id.png"
+  rm -f "$tmp"
+}
+
+project_card meredsp206 assets/img/meredsp206/icon-512.png 'MEREDSP206' 't.racks DSP 206 · Linux + Android'
 
 echo "Images written to assets/img/"

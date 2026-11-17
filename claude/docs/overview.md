@@ -33,6 +33,10 @@ Roman numerals are reused to number the universes (I → V), and 404 is "CDIV".
   boards (FloBoard pumping board, quad pumping board, skimboard, beginner surf
   foil), pumping stabiliser, custom carbon masts, MPCNC for polystyrene.
 - GitHub: https://github.com/FlogFr (repo of this site: FlogFr/www-studio-xci).
+- MereDSP206: public source at https://github.com/FlogFr/meredsp206 (Rust
+  GTK 4 app + `dsp206` CLI for Linux, Kotlin / Jetpack Compose app for
+  Android), version 0.1.0. Its README and `claude/docs/` are the source of
+  truth for the user guide on `/son/meredsp206/`.
 - Thomann gave its agreement to distribute MereDSP206 publicly and wished the
   project success.
 

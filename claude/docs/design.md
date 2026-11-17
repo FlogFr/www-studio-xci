@@ -66,8 +66,9 @@ III, IV and V are code-side designs, pending real mockups.
 
 - MereDSP206: split hero with a DSP console (IN A/B amber meters, OUT 1–6
   green meters, GAIN/X-OVER/EQ/DELAY/LIMIT tabs) → `visual-dsp.html`; 2×2
-  feature grid; Linux (amber, filled) / Android (green outline) install cards
-  + terminal block; disclaimer note.
+  feature grid; a Linux capture (wide) beside an Android capture (rounded
+  phone frame) → `shots.html`; Linux (amber, filled) / Android (green outline)
+  install cards + terminal block; disclaimer note.
 - Sound system: wide hero photo (replaced by an SVG schematic until a photo
   exists → `visual-stacks.html`); stats box 2/4/3/6; spec tables with accent
   header rule; rack grid; signal-chain figure; amber callout linking MereDSP206.
@@ -75,11 +76,30 @@ III, IV and V are code-side designs, pending real mockups.
   `visual-book.html` until `cover:` is set); "Fiche du livre" facts; numbered
   chapter list; quote; blue + outline buttons; dark navy "Aller plus loin" callout.
 
+## Components designed in code
+
+- Screenshots (`shots.html`): phone captures in a 6 px `--surface-2` bezel
+  with 26 px radius; desktop captures with a 1 px `--line` border and 10 px
+  radius; mono caption. A single phone can float right (250 px, max 38 %)
+  beside the text; `h2` clears the float. Rows: phones 150–230 px wide; a
+  desktop + phone row is 3.2 fr / 1 fr.
+- App icon above the kicker (88 px, 22 % radius, 1 px `--line` ring).
+- `<kbd>` keys: mono, `--surface` fill, 2 px bottom border.
+- Install cards can carry a `note` line under the formats.
+- Tables are real table boxes (header and body columns aligned, full width);
+  under 720 px they become horizontally scrollable blocks.
+
 ## Deliberate differences from the mockups
 
 - Placeholders (`[DATE]`, `[CAPTURE]`, `[LICENCE]`…) are not rendered; the
   missing facts are tracked in `content-status.md`.
 - The MereDSP206 related card "Mere pour Ardour 9" is replaced by the horn
   project until that project is confirmed.
+- MereDSP206 grew from the mockup's six sections into a full user guide
+  (connection, one section per screen, settings table, Linux shortcuts and
+  CLI, troubleshooting): same components, more of them. The hero keeps the
+  stylised DSP console; real screenshots illustrate the body. The app icon
+  sits above the kicker (not in the mockup). The mockup's "Licence" fact is
+  omitted until the licence is known.
 - Below 1080 px the aside stacks above the text; below 720 px every grid goes
   single column.

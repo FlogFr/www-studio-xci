@@ -21,3 +21,9 @@
   multiplication, "–" for ranges (800 Hz – 1 kHz), units with a space (12 m, 300 W).
 - One article = one project. Use `##` headings with an explicit id
   (`## Titre {#slug}`): they feed the numbered table of contents.
+- Software pages (MereDSP206) are user documentation: what it does, install,
+  connect, then one section per screen with its screenshot, a settings
+  reference table, troubleshooting. Take every feature, range and command
+  from the project's repository (README, docs, code), never from memory.
+- Name UI elements in italics. When the screenshots are in English, give the
+  French label first and the English one in parentheses: *Console* (*Mixer*).

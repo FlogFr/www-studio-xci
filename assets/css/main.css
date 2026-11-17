@@ -218,14 +218,15 @@ a.crumb-studio:hover { color: var(--ink); }
 
 .table-label { margin-top: 2em !important; font: 500 13px/1.4 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 .prose .table-wrap, .prose table { width: 100%; }
-.prose table { border-collapse: collapse; font-size: 1rem; line-height: 1.5; display: block; overflow-x: auto; }
-.prose table thead, .prose table tbody { display: table; width: 100%; border-collapse: collapse; }
+/* A real table box, so header and body columns line up; below 720 px it
+   becomes a scrollable block (see §9). */
+.prose table { border-collapse: collapse; font-size: 1rem; line-height: 1.5; }
 .prose th { text-align: left; padding: 0 16px 14px 0; border-bottom: 1px solid var(--accent); font: 600 13px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
 .prose td { padding: 15px 16px 15px 0; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; }
 .prose td:first-child { color: var(--ink); font-weight: 600; }
 
 .callout { background: var(--accent); color: var(--accent-ink); padding: 24px; }
-.prose .callout p, .prose .callout li { color: inherit; }
+.prose .callout p, .prose .callout li, .prose .callout li::marker { color: inherit; }
 .prose .callout a { color: inherit; font-weight: 700; }
 .callout-title { font: 700 13px/1.4 var(--font-mono) !important; letter-spacing: .2em; text-transform: uppercase; }
 .callout > * + * { margin-top: .6em; }
@@ -270,7 +271,29 @@ a.crumb-studio:hover { color: var(--ink); }
 .install-card.is-primary .install-name, .install-card.is-primary .install-formats { color: var(--accent-ink) !important; }
 .install-formats { margin-top: 12px; font: 14px/1.4 var(--font-mono); color: var(--muted) !important; }
 a.install-card:hover { outline: 2px solid var(--ink); }
+.install-note { margin-top: 10px; font-size: .95rem; line-height: 1.5; color: var(--ink-soft) !important; }
+.install-card.is-primary .install-note { color: var(--accent-ink) !important; }
 .terminal { margin-top: 12px; }
+.prose .prompt { -webkit-user-select: none; user-select: none; }
+.terminal .comment { color: var(--muted); }
+.prose kbd {
+  display: inline-block; padding: .05em .45em; font: .82em/1.5 var(--font-mono); color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-bottom-width: 2px; white-space: nowrap;
+}
+
+/* App icon (software articles) */
+.app-icon { width: 88px; height: 88px; border-radius: 22%; box-shadow: 0 0 0 1px var(--line); }
+
+/* Screenshots: phone frames and window captures */
+.shot a { display: block; }
+.shot img { width: 100%; height: auto; }
+.shot-phone img { border: 6px solid var(--surface-2); border-radius: 26px; box-shadow: 0 0 0 1px var(--line); background: var(--surface); }
+.shot-desktop img { border: 1px solid var(--line); border-radius: 10px; }
+.prose .shot figcaption { margin-top: 12px; }
+.shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 230px)); gap: 20px; align-items: start; }
+.shots:has(.shot-desktop) { grid-template-columns: minmax(0, 3.2fr) minmax(0, 1fr); }
+.shot-side { float: right; width: min(250px, 38%); margin: .35em 0 1.4em 36px !important; }
+.prose h2 { clear: both; }
 
 /* Hero visuals */
 .dsp { border: 1px solid var(--line); background: var(--surface); padding: 22px 20px; font-family: var(--font-mono); }
@@ -623,6 +646,11 @@ body[data-universe="others"] { background-attachment: fixed; }
   .universe-switch a { min-width: 30px; padding: 0 4px; }
   .site-header .btn-sm { padding: 8px 12px; }
   .features, .install { grid-template-columns: minmax(0, 1fr); }
+  .prose table { display: block; overflow-x: auto; }
+  .shot-side { float: none; width: min(260px, 100%); margin: 1.1em auto 0 !important; }
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .shots:has(.shot-desktop) { grid-template-columns: minmax(0, 1fr); }
+  .shots:has(.shot-desktop) .shot-phone { width: min(260px, 100%); justify-self: center; }
   .chain-flow { flex-direction: column; align-items: stretch; }
   .chain-box { white-space: normal; }
   .chain-arrow { transform: rotate(90deg); align-self: center; }
