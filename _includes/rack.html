@@ -1,0 +1,9 @@
+{%- comment -%} Equipment grid. items: [{role, name, spare?}] {%- endcomment -%}
+<ul class="rack">
+  {%- for r in include.items %}
+  <li{% if r.spare %} class="is-spare"{% endif %}>
+    <p class="cell-label">{{ r.role }}</p>
+    <p class="rack-name">{{ r.name }}</p>
+  </li>
+  {%- endfor %}
+</ul>

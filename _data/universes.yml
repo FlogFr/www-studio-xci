@@ -1,0 +1,65 @@
+# Universe registry. Order = display order. The `id` matches the collection
+# name, the folder of the index page and the [data-universe] CSS theme.
+
+- id: son
+  numeral: I
+  name: Son
+  url: /son/
+  tagline: Sono, DSP et enceintes faites main.
+  description: >-
+    Ma sono quatre voies, le logiciel MereDSP206 pour piloter un t.racks
+    DSP 206 depuis Linux ou Android, et un pavillon à directivité constante.
+
+- id: logiciel
+  numeral: II
+  name: Logiciel
+  url: /logiciel/
+  tagline: Logiciel libre, Linux, infrastructure.
+  description: >-
+    Logiciel libre, Linux et infrastructure Cloud : mon livre The Art Of
+    Kubernetes, mes formations et les outils que j'écris.
+  links:
+    - title: Infratelier
+      kicker: Freelance · Formations
+      url: https://infratelier.com/
+      text: >-
+        Mon activité d'expert infrastructure à Nantes : formations Cloud,
+        Kubernetes et Linux, audit et plateformes sur mesure.
+    - title: theartofkubernetes.com
+      kicker: Site du livre
+      url: https://theartofkubernetes.com/
+      text: Le site du livre, avec un chapitre offert par e-mail.
+
+- id: motion
+  numeral: III
+  name: Motion
+  url: /motion/
+  tagline: Blender, animation 2D et 3D.
+  description: >-
+    Rendus Blender, animations 2D et 3D, expérimentations visuelles :
+    les résultats d'abord, la fabrication ensuite.
+
+- id: web
+  numeral: IV
+  name: Web
+  url: /web/
+  tagline: Sites réalisés, références.
+  description: >-
+    Les sites que j'ai réalisés pour des amis, des associations et pour mes
+    propres projets.
+
+- id: others
+  numeral: V
+  name: Others
+  url: /others/
+  tagline: Shape, composites et le reste.
+  description: >-
+    Shape de boards et de foils, matériaux composites, et tous les projets
+    qui ne rentrent dans aucune autre case.
+  links:
+    - title: Hydrocamp
+      kicker: Atelier de shape · Nantes
+      url: https://hydrocamp.fr/
+      text: >-
+        Mon atelier amateur de shape : pumping boards, skimboard, stabilisateurs
+        et mâts carbone sur mesure.

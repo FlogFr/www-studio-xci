@@ -1,0 +1,52 @@
+---
+layout: default
+---
+{%- assign words = content | strip_html | number_of_words -%}
+{%- assign minutes = words | divided_by: 200 | plus: 1 -%}
+{%- assign hero = page.hero_layout | default: "split" -%}
+<article class="article">
+  <header class="wrap article-hero{% if page.hero_visual %} hero-{{ hero }}{% endif %}">
+    <div class="hero-text">
+      {%- if page.kicker %}
+      <p class="kicker">{{ page.kicker }}</p>
+      {%- endif %}
+      <h1 class="article-title">{{ page.headline | default: page.title }}</h1>
+      <p class="lede">{{ page.lede | default: page.description }}</p>
+      {%- if page.ctas %}
+      <div class="ctas">
+        {%- for c in page.ctas %}
+        <a class="btn {{ c.style | default: 'btn-accent' }}" href="{{ c.url | relative_url }}">{% if c.icon %}{% include icon.html name=c.icon %}{% endif %}{{ c.label }}{% if c.url contains "://" %}{% include icon.html name="external" %}{% endif %}</a>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+      <p class="meta">
+        <span>{{ site.author.name }}</span>
+        {%- if page.date %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">{% include date-fr.html date=page.date %}</time>
+        {%- endif %}
+        {%- if page.version %}
+        <span>v{{ page.version }}</span>
+        {%- endif %}
+        <span>~{{ minutes }} min de lecture</span>
+      </p>
+    </div>
+    {%- if page.hero_visual and hero != "wide" %}
+    <div class="hero-visual">{% include visual-{{ page.hero_visual }}.html %}</div>
+    {%- endif %}
+  </header>
+
+  {%- if page.hero_visual and hero == "wide" %}
+  <div class="wrap hero-wide-visual">{% include visual-{{ page.hero_visual }}.html %}</div>
+  {%- endif %}
+
+  <div class="wrap article-body">
+    <aside class="article-aside">
+      {% include toc.html html=content %}
+      {% include facts.html %}
+    </aside>
+    <div class="prose">
+      {{ content }}
+    </div>
+  </div>
+</article>
+{% include related.html %}

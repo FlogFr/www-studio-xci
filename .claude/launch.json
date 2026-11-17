@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jekyll",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": [
+        "run", "--rm", "--name", "studio-xci-serve",
+        "-v", "/home/flog/Projects/www.studio-xci.fr:/site",
+        "-v", "studio-xci-bundle:/usr/local/bundle",
+        "-w", "/site", "--user", "1000:1000", "-e", "HOME=/tmp",
+        "-p", "4000:4000",
+        "ruby:3.3-bookworm",
+        "bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0", "--force_polling"
+      ],
+      "port": 4000
+    }
+  ]
+}

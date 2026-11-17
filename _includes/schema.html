@@ -1,0 +1,26 @@
+{%- comment -%}
+  JSON-LD added on top of jekyll-seo-tag's WebPage/BlogPosting:
+  - Person on the hub
+  - BreadcrumbList on every other indexable page
+  - the entity described by an article, from its `schema:` front matter
+    (a hash with at least "@type"); name/url/description/author are added here.
+{%- endcomment -%}
+{%- assign u = nil -%}
+{%- if page.universe %}{% assign u = site.data.universes | where: "id", page.universe | first %}{% endif -%}
+{%- if page.layout == "home" %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/' | absolute_url | jsonify }},"jobTitle":"Expert infrastructure Cloud & Linux, formateur et auteur","knowsAbout":["Kubernetes","Linux","Logiciel libre","Sonorisation","DSP","Blender","Shape de foils"],"sameAs":{{ site.social.links | jsonify }}}
+</script>
+{%- elsif page.sitemap != false %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Studio XCI","item":{{ '/' | absolute_url | jsonify }}}
+{%- if u %},{"@type":"ListItem","position":2,"name":{{ u.numeral | append: " — " | append: u.name | jsonify }},"item":{{ u.url | absolute_url | jsonify }}}{% endif %}
+{%- if u and page.url != u.url %},{"@type":"ListItem","position":3,"name":{{ page.title | jsonify }},"item":{{ page.url | absolute_url | jsonify }}}{% endif %}]}
+</script>
+{%- endif %}
+{%- if page.schema %}
+{%- assign extra = page.schema | jsonify | remove_first: "{" %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","name":{{ page.schema_name | default: page.title | jsonify }},"url":{{ page.url | absolute_url | jsonify }},"description":{{ page.description | jsonify }},"inLanguage":"fr","author":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/' | absolute_url | jsonify }}},{{ extra }}
+</script>
+{%- endif %}

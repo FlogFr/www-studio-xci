@@ -1,0 +1,22 @@
+{%- comment -%} IV Web: references from _data/web.yml {%- endcomment -%}
+<ul class="references">
+  {%- for s in site.data.web %}
+  {%- assign host = s.url | remove: "https://" | remove: "http://" | remove: "www." | split: "/" | first %}
+  <li class="ref">
+    <div class="ref-chrome" aria-hidden="true"><span></span><span></span><span></span><code>{{ host }}</code></div>
+    {%- if s.image %}
+    <img class="ref-shot" src="{{ s.image | relative_url }}" alt="Capture d'écran de {{ s.name }}" width="1280" height="800" loading="lazy">
+    {%- endif %}
+    <div class="ref-body">
+      <p class="card-kicker">{{ s.kind }}{% if s.year %} · {{ s.year }}{% endif %}</p>
+      <h3 class="ref-name">{{ s.name }}</h3>
+      <p class="ref-text">{{ s.text }}</p>
+      <p class="ref-meta">
+        {%- if s.for %}<span>Pour : {{ s.for }}</span>{% endif %}
+        {%- if s.stack %}<span>{{ s.stack | join: " · " }}</span>{% endif -%}
+      </p>
+      <a class="ref-link" href="{{ s.url }}">Voir le site {% include icon.html name="external" %}<span class="sr-only"> {{ s.name }}</span></a>
+    </div>
+  </li>
+  {%- endfor %}
+</ul>

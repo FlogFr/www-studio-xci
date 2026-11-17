@@ -1,0 +1,19 @@
+{%- if include.docs.size > 0 %}
+<ol class="rows">
+  {%- for d in include.docs %}
+  <li>
+    <a class="row" href="{{ d.url | relative_url }}">
+      <span class="row-num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+      <span class="row-main">
+        <span class="row-kicker">{{ d.card_kicker | default: d.kicker }}{% if d.status %} · <strong>{{ d.status }}</strong>{% endif %}</span>
+        <span class="row-title">{{ d.card_title | default: d.title }}</span>
+        <span class="row-text">{{ d.description }}</span>
+      </span>
+      <span class="row-arrow">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  {%- endfor %}
+</ol>
+{%- else %}
+<p class="empty">Les premiers articles arrivent.</p>
+{%- endif %}

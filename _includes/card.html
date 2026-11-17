@@ -1,0 +1,12 @@
+{%- assign d = include.doc -%}
+{%- assign du = site.data.universes | where: "id", d.universe | first -%}
+<a class="card" href="{{ d.url | relative_url }}">
+  <p class="card-kicker">
+    {%- if d.universe != page.universe %}{{ du.numeral }} · {{ du.name }} · {% endif -%}
+    {{ d.card_kicker | default: d.kicker }}{% if d.status %} · {{ d.status }}{% endif -%}
+  </p>
+  <h3 class="card-title">{{ d.card_title | default: d.title }}</h3>
+  {%- if include.text %}
+  <p class="card-text">{{ d.description }}</p>
+  {%- endif %}
+</a>

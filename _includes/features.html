@@ -1,0 +1,9 @@
+{%- comment -%} Grid of labelled feature cells. items: [{label, text}] {%- endcomment -%}
+<ul class="features">
+  {%- for f in include.items %}
+  <li>
+    <p class="cell-label">{{ f.label }}</p>
+    <p>{{ f.text }}</p>
+  </li>
+  {%- endfor %}
+</ul>

@@ -1,0 +1,14 @@
+{%- comment -%}
+  Book hero. Uses the real cover when `cover` is set in front matter,
+  otherwise a typographic stand-in (not the actual cover).
+{%- endcomment -%}
+{%- if page.cover %}
+<img class="book-cover" src="{{ page.cover | relative_url }}" alt="Couverture de {{ page.schema_name | default: page.title }}" width="600" height="900">
+{%- else %}
+<div class="book" aria-hidden="true">
+  <span class="book-kicker">Édition française</span>
+  <span class="book-title">The Art Of Kubernetes</span>
+  <span class="book-sub">Le livre pour maîtriser Kubernetes et son écosystème</span>
+  <span class="book-author">Florian Grignon</span>
+</div>
+{%- endif %}

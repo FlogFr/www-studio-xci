@@ -1,0 +1,20 @@
+{%- comment -%}
+  Signal chain figure. chain: {source, processor, outputs: [..], caption}
+{%- endcomment -%}
+{%- assign c = include.chain -%}
+<figure class="chain">
+  <div class="chain-flow">
+    <span class="chain-box">{{ c.source }}</span>
+    <span class="chain-arrow" aria-hidden="true">→</span>
+    <span class="chain-box chain-main">{{ c.processor }}</span>
+    <span class="chain-arrow" aria-hidden="true">→</span>
+    <ul class="chain-outputs">
+      {%- for o in c.outputs %}
+      <li>{{ o }}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- if c.caption %}
+  <figcaption>{{ c.caption }}</figcaption>
+  {%- endif %}
+</figure>

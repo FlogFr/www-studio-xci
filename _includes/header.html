@@ -1,0 +1,25 @@
+{%- assign u = include.universe -%}
+<header class="site-header">
+  <div class="wrap bar">
+    <nav class="crumbs" aria-label="Fil d'Ariane">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Studio XCI — accueil">XCI</a>
+      {%- if u %}
+      <a class="crumb-studio" href="{{ '/' | relative_url }}">← studio</a>
+      <a class="crumb-universe" href="{{ u.url | relative_url }}"{% if page.url == u.url %} aria-current="page"{% endif %}>{{ u.numeral }} — {{ u.name }}</a>
+      {%- else %}
+      <span class="crumb-studio">studio</span>
+      {%- endif %}
+    </nav>
+    {%- if page.header_cta %}
+    <a class="btn btn-accent btn-sm" href="{{ page.header_cta.url | relative_url }}">{{ page.header_cta.label }}</a>
+    {%- elsif u and page.layout == "article" %}
+    <a class="bar-link" href="{{ u.url | relative_url }}">← tous les articles</a>
+    {%- else %}
+    <nav class="universe-switch" aria-label="Univers">
+      {%- for x in site.data.universes %}
+      <a href="{{ x.url | relative_url }}" data-universe-link="{{ x.id }}" title="{{ x.numeral }} — {{ x.name }}"{% if x.id == page.universe %} aria-current="page"{% endif %}>{{ x.numeral }}<span class="sr-only"> — {{ x.name }}</span></a>
+      {%- endfor %}
+    </nav>
+    {%- endif %}
+  </div>
+</header>

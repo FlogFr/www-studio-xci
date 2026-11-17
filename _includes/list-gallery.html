@@ -1,0 +1,27 @@
+{%- comment -%}
+  III Motion: a grid of renders. Each document provides `thumbnail`
+  (16:9 image) and optionally `software` and `year`.
+{%- endcomment -%}
+{%- if include.docs.size > 0 %}
+<ul class="gallery">
+  {%- for d in include.docs %}
+  <li>
+    <a class="tile" href="{{ d.url | relative_url }}">
+      <span class="tile-media">
+        {%- if d.thumbnail %}
+        <img src="{{ d.thumbnail | relative_url }}" alt="{{ d.thumbnail_alt | default: d.title }}" width="640" height="360" loading="lazy">
+        {%- endif %}
+        <span class="tile-tag">SC {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+      </span>
+      <span class="tile-title">{{ d.card_title | default: d.title }}</span>
+      <span class="tile-meta">{{ d.software }}{% if d.software and d.year %} · {% endif %}{{ d.year }}</span>
+    </a>
+  </li>
+  {%- endfor %}
+</ul>
+{%- else %}
+<div class="empty empty-gallery">
+  <p class="empty-tag">SC 01 · TK 01</p>
+  <p>Les premiers rendus Blender et animations 2D / 3D arrivent bientôt ici.</p>
+</div>
+{%- endif %}

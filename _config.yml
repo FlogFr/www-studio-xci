@@ -1,0 +1,75 @@
+# Site
+title: Studio XCI
+tagline: Les projets de Florian Grignon
+description: >-
+  Studio XCI : la bibliothèque des projets de Florian Grignon — son et DSP,
+  logiciel libre et Kubernetes, motion design, sites web et shape de foils.
+url: https://studio-xci.fr
+baseurl: ""
+lang: fr-FR
+locale: fr_FR
+timezone: Europe/Paris
+theme: null # no GitHub Pages default theme: every layout lives in _layouts/
+
+author:
+  name: Florian Grignon
+  url: https://studio-xci.fr/
+
+# jekyll-seo-tag
+logo: /assets/img/logo.png
+social:
+  name: Florian Grignon
+  links:
+    - https://github.com/FlogFr
+    - https://infratelier.com/
+    - https://theartofkubernetes.com/
+
+# One collection per universe -> /<universe>/<slug>/
+collections:
+  son:
+    output: true
+    permalink: /:collection/:name/
+  logiciel:
+    output: true
+    permalink: /:collection/:name/
+  motion:
+    output: true
+    permalink: /:collection/:name/
+  others:
+    output: true
+    permalink: /:collection/:name/
+
+defaults:
+  - scope: { path: "" }
+    values: { image: /assets/img/og/studio.png }
+  - scope: { path: "", type: son }
+    values: { layout: article, universe: son, image: /assets/img/og/son.png }
+  - scope: { path: "", type: logiciel }
+    values: { layout: article, universe: logiciel, image: /assets/img/og/logiciel.png }
+  - scope: { path: "", type: motion }
+    values: { layout: article, universe: motion, image: /assets/img/og/motion.png }
+  - scope: { path: "", type: others }
+    values: { layout: article, universe: others, image: /assets/img/og/others.png }
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter_opts:
+    disable: true
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+exclude:
+  - CLAUDE.md
+  - claude/
+  - design/
+  - Makefile
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - scripts/
+  - vendor/

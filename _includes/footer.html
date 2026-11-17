@@ -1,0 +1,18 @@
+{%- assign u = include.universe -%}
+<footer class="site-footer">
+  <div class="wrap footer-bar">
+    {%- if u and page.url != u.url %}
+    <a class="footer-back" href="{{ u.url | relative_url }}">← {{ u.numeral }} · {{ u.name }}</a>
+    {%- elsif u %}
+    <a class="footer-back" href="{{ '/' | relative_url }}">← studio</a>
+    {%- else %}
+    <span class="footer-back">XCI = 91</span>
+    {%- endif %}
+    <nav class="footer-universes" aria-label="Tous les univers">
+      {%- for x in site.data.universes %}
+      <a href="{{ x.url | relative_url }}"{% if x.id == page.universe %} aria-current="page"{% endif %}>{{ x.numeral }} {{ x.name }}</a>
+      {%- endfor %}
+    </nav>
+    <a class="footer-site" href="{{ '/' | relative_url }}">studio-xci.fr</a>
+  </div>
+</footer>

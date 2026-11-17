@@ -1,0 +1,45 @@
+# IV Web — references. One entry per site, newest first.
+#
+#   - name: Nom du site            (required)
+#     url: https://exemple.fr/     (required)
+#     for: Association X           (client / for whom; "Moi" for own projects)
+#     year: 2025
+#     kind: Site vitrine           (vitrine, boutique, documentation, landing…)
+#     stack: [Jekyll, GitHub Pages]
+#     text: Une ou deux phrases : le besoin, ce qui a été livré.
+#     image: /assets/img/web/exemple.webp   (optional screenshot, 16:10)
+#
+# TODO: add the sites made for friends and associations (see claude/docs/content-status.md).
+
+- name: studio-xci.fr
+  url: https://studio-xci.fr/
+  for: Moi
+  kind: Bibliothèque de projets
+  stack: [Jekyll, GitHub Pages]
+  text: >-
+    Ce site : cinq univers, cinq identités graphiques, des pages statiques
+    rapides et pensées pour le référencement.
+
+- name: infratelier.com
+  url: https://infratelier.com/
+  for: Infratelier
+  kind: Site professionnel
+  text: >-
+    Le site de mon activité freelance : formations Cloud, Kubernetes et Linux,
+    accompagnement et audit d'infrastructure.
+
+- name: theartofkubernetes.com
+  url: https://theartofkubernetes.com/
+  for: The Art Of Kubernetes
+  kind: Site de livre
+  text: >-
+    La vitrine du livre : présentation, sommaire, chapitre offert par e-mail
+    et lien d'achat.
+
+- name: hydrocamp.fr
+  url: https://hydrocamp.fr/
+  for: Hydrocamp
+  kind: Atelier · Galerie · Blog
+  text: >-
+    Le site de mon atelier de shape : boards, accessoires de foil, galerie et
+    carnet de fabrication.

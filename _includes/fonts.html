@@ -1,0 +1,22 @@
+{%- comment -%}
+  Google Fonts, only the families/weights the current page uses.
+  The hub and 404 show a card per universe, so they load every display face.
+{%- endcomment -%}
+{%- assign f_studio = "family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500" -%}
+{%- assign f_son = "family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500" -%}
+{%- assign f_logiciel = "family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Serif:ital,wght@0,400;1,400&family=IBM+Plex+Mono:wght@400;500" -%}
+{%- assign f_motion = "family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500" -%}
+{%- assign f_web = "family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500" -%}
+{%- assign f_others = "family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700" -%}
+{%- case page.universe -%}
+  {%- when "son" %}{% assign families = f_son -%}
+  {%- when "logiciel" %}{% assign families = f_logiciel -%}
+  {%- when "motion" %}{% assign families = f_motion -%}
+  {%- when "web" %}{% assign families = f_web -%}
+  {%- when "others" %}{% assign families = f_others -%}
+  {%- else -%}
+    {%- assign families = f_studio | append: "&family=Barlow+Condensed:wght@800&family=IBM+Plex+Sans:wght@700&family=Syne:wght@800&family=Fraunces:opsz,wght@9..144,600&family=Space+Grotesk:wght@700" -%}
+{%- endcase %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{{ families }}&display=swap">

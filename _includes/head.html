@@ -1,0 +1,18 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- case page.universe -%}
+  {%- when "son" %}{% assign theme_color = "#121212" -%}
+  {%- when "logiciel" %}{% assign theme_color = "#ffffff" -%}
+  {%- when "motion" %}{% assign theme_color = "#0d0b14" -%}
+  {%- when "web" %}{% assign theme_color = "#f5efe4" -%}
+  {%- when "others" %}{% assign theme_color = "#e6eeec" -%}
+  {%- else %}{% assign theme_color = "#f3f1ec" -%}
+{%- endcase %}
+<meta name="theme-color" content="{{ theme_color }}">
+{% seo %}
+{% include fonts.html %}
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+<link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="icon" href="{{ '/assets/img/favicon-32.png' | relative_url }}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+{% include schema.html %}

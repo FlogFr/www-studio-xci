@@ -1,0 +1,13 @@
+{%- if page.related %}
+<section class="related" aria-labelledby="related-title">
+  <div class="wrap">
+    <h2 class="related-title" id="related-title">À lire ensuite</h2>
+    <div class="cards">
+      {%- for r in page.related %}
+      {%- assign doc = site.documents | where: "url", r | first %}
+      {%- if doc %}{% include card.html doc=doc %}{% endif %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

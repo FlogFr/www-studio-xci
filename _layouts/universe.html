@@ -1,0 +1,54 @@
+---
+layout: default
+---
+{%- assign u = site.data.universes | where: "id", page.universe | first -%}
+{%- assign guests = site.documents | where_exp: "d", "d.also_in contains page.universe" -%}
+<section class="wrap universe-hero">
+  <p class="universe-numeral" aria-hidden="true">{{ u.numeral }}</p>
+  <div class="universe-head">
+    <p class="kicker">Univers {{ u.numeral }}</p>
+    <h1 class="universe-title">{{ u.name }}</h1>
+    <p class="lede">{{ u.tagline }}</p>
+    <div class="universe-intro">{{ content }}</div>
+  </div>
+</section>
+
+<section class="wrap universe-list" aria-labelledby="list-title">
+  <h2 class="section-title" id="list-title">{{ page.list_title | default: "Articles" }}</h2>
+  {%- if page.list_style == "references" %}
+  {% include list-references.html %}
+  {%- else %}
+  {%- assign docs = site[page.universe] | sort: "order" %}
+  {%- if page.list_style == "gallery" %}
+  {% include list-gallery.html docs=docs %}
+  {%- else %}
+  {% include list-rows.html docs=docs %}
+  {%- endif %}
+  {%- endif %}
+</section>
+
+{%- if guests.size > 0 %}
+<section class="wrap universe-guests" aria-labelledby="guests-title">
+  <h2 class="section-title" id="guests-title">Aussi dans cet univers</h2>
+  <div class="cards">
+    {%- for d in guests %}{% include card.html doc=d text=true %}{% endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{%- if u.links %}
+<section class="wrap universe-links" aria-labelledby="links-title">
+  <h2 class="section-title" id="links-title">Ailleurs sur le web</h2>
+  <div class="cards">
+    {%- for l in u.links %}
+    <a class="card card-external" href="{{ l.url }}">
+      <p class="card-kicker">{{ l.kicker }}</p>
+      <h3 class="card-title">{{ l.title }} {% include icon.html name="external" %}</h3>
+      <p class="card-text">{{ l.text }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+{% include universe-nav.html %}

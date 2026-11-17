@@ -1,0 +1,51 @@
+{%- comment -%} Sound system hero: schematic of the two stacks and the rack (not to scale). {%- endcomment -%}
+{%- capture stack -%}
+  <rect class="sv-box" x="0" y="40" width="240" height="40"/>
+  <circle class="sv-cone" cx="90" cy="60" r="10"/><circle class="sv-cone" cx="150" cy="60" r="10"/>
+  <rect class="sv-box" x="0" y="84" width="240" height="60"/>
+  <rect class="sv-cone" x="16" y="92" width="208" height="44"/>
+  <rect class="sv-acc" x="112" y="110" width="16" height="8"/>
+  <path class="sv-cone" d="M16 92 112 110M224 92 128 110M16 136 112 118M224 136 128 118"/>
+  <rect class="sv-box" x="0" y="148" width="240" height="104"/>
+  <circle class="sv-cone" cx="70" cy="200" r="36"/><circle class="sv-cone" cx="70" cy="200" r="10"/>
+  <circle class="sv-cone" cx="170" cy="200" r="36"/><circle class="sv-cone" cx="170" cy="200" r="10"/>
+  <rect class="sv-box" x="0" y="256" width="240" height="90"/>
+  <path class="sv-cone" d="M20 331 70 271 120 331 170 271 220 331"/>
+  <rect class="sv-box" x="0" y="350" width="240" height="90"/>
+  <path class="sv-cone" d="M20 425 70 365 120 425 170 365 220 425"/>
+{%- endcapture -%}
+<figure class="stacks-figure">
+  <svg class="stacks" viewBox="0 0 1200 470" role="img" aria-label="Schéma du sound system : deux stacks de quatre voies (aigu, haut-médium à pavillon, bas-médium, deux caissons W-bin) de part et d'autre d'un rack 10U">
+    <g transform="translate(170 0)">{{ stack }}</g>
+    <g transform="translate(790 0)">{{ stack }}</g>
+    <g class="sv-text">
+      <text x="158" y="65" text-anchor="end">AIGU · 2× HF50</text>
+      <text x="158" y="119" text-anchor="end">HAUT-MÉD · JBL 2482</text>
+      <text x="158" y="205" text-anchor="end">BAS-MÉD · 2× ME-12</text>
+      <text x="158" y="352" text-anchor="end">GRAVE · 2× W-BIN</text>
+      <text x="1042" y="65">AIGU · 2× HF50</text>
+      <text x="1042" y="119">HAUT-MÉD · JBL 2482</text>
+      <text x="1042" y="205">BAS-MÉD · 2× ME-12</text>
+      <text x="1042" y="352">GRAVE · 2× W-BIN</text>
+    </g>
+    <path class="sv-cable" d="M500 300C455 300 455 200 410 200M500 380C455 380 455 300 410 300M700 300C745 300 745 200 790 200M700 380C745 380 745 300 790 300"/>
+    <g class="sv-rack">
+      <text class="sv-text sv-rack-title" x="600" y="206" text-anchor="middle">RACK 10U</text>
+      <rect class="sv-box" x="500" y="218" width="200" height="222"/>
+      <rect class="sv-acc" x="512" y="230" width="176" height="34"/>
+      <rect class="sv-mod" x="512" y="270" width="176" height="34"/>
+      <rect class="sv-mod" x="512" y="310" width="176" height="34"/>
+      <rect class="sv-mod" x="512" y="350" width="176" height="34"/>
+      <rect class="sv-mod sv-spare" x="512" y="390" width="176" height="34"/>
+      <g class="sv-text sv-small" text-anchor="middle">
+        <text x="600" y="251">t.racks DSP 206</text>
+        <text x="600" y="291">Crest CPX 2600</text>
+        <text x="600" y="331">Ecler APA1000</text>
+        <text x="600" y="371">Ecler APA1000</text>
+        <text x="600" y="411">Inter-M M700 · secours</text>
+      </g>
+    </g>
+    <path class="sv-ground" d="M40 444H1160"/>
+  </svg>
+  <figcaption>Schéma : deux stacks quatre voies et le rack 10U (non à l'échelle).</figcaption>
+</figure>

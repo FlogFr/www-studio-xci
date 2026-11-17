@@ -1,0 +1,13 @@
+{%- if page.facts %}
+<section class="facts{% if page.facts_style %} facts-{{ page.facts_style }}{% endif %}" aria-labelledby="facts-title">
+  <p class="aside-title" id="facts-title">{{ page.facts_title | default: "En bref" }}</p>
+  <dl>
+    {%- for f in page.facts %}
+    <div>
+      <dt>{{ f.label }}</dt>
+      <dd>{% if f.url %}<a href="{{ f.url | relative_url }}">{{ f.value }}</a>{% else %}{{ f.value }}{% endif %}</dd>
+    </div>
+    {%- endfor %}
+  </dl>
+</section>
+{%- endif %}

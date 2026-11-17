@@ -1,0 +1,18 @@
+{%- comment -%}
+  Bottom switcher: one tile per universe, each painted with its own colours
+  (fonts stay those of the current page, see .u-tiles in main.css).
+{%- endcomment -%}
+<nav class="wrap u-tiles-wrap" aria-labelledby="u-tiles-title">
+  <h2 class="section-title" id="u-tiles-title">Les cinq univers</h2>
+  <ul class="u-tiles">
+    {%- for x in site.data.universes %}
+    <li>
+      <a class="u-tile" data-universe="{{ x.id }}" href="{{ x.url | relative_url }}"{% if x.id == page.universe %} aria-current="page"{% endif %}>
+        <span class="u-tile-num">{{ x.numeral }}</span>
+        <span class="u-tile-name">{{ x.name }}</span>
+        <span class="u-tile-tag">{{ x.tagline }}</span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+</nav>

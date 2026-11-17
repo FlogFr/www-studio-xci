@@ -1,0 +1,17 @@
+{%- comment -%}
+  Numbered table of contents built from the rendered `<h2 id="…">` of the
+  article (ids come from `## Titre {#id}` in the Markdown).
+{%- endcomment -%}
+{%- assign parts = include.html | split: '<h2 id="' -%}
+{%- if parts.size > 2 %}
+<nav class="toc" aria-label="Sommaire">
+  <p class="aside-title">Sommaire</p>
+  <ol>
+    {%- for part in parts offset: 1 %}
+    {%- assign id = part | split: '"' | first %}
+    {%- assign title = part | split: '</h2>' | first | remove_first: id | remove_first: '">' | strip_html | strip %}
+    <li><a href="#{{ id }}">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} · {{ title }}</a></li>
+    {%- endfor %}
+  </ol>
+</nav>
+{%- endif %}

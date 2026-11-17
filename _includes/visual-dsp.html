@@ -1,0 +1,24 @@
+{%- comment -%} MereDSP206 hero: stylised DSP 206 control surface (decorative). {%- endcomment -%}
+<div class="dsp" aria-hidden="true">
+  <div class="dsp-top">
+    <span><i class="dsp-led"></i>DSP 206 · connecté</span>
+    <span>PRESET 01</span>
+  </div>
+  <div class="dsp-meters">
+    {%- assign levels = "72,68,|,92,90,68,66,52,54" | split: "," -%}
+    {%- assign labels = "IN A,IN B,|,OUT 1,OUT 2,OUT 3,OUT 4,OUT 5,OUT 6" | split: "," -%}
+    {%- for l in labels %}
+    {%- if l == "|" %}
+    <span class="dsp-sep"></span>
+    {%- else %}
+    <span class="dsp-ch{% if forloop.index < 3 %} is-in{% endif %}">
+      <span class="dsp-label">{{ l }}</span>
+      <span class="dsp-track"><span class="dsp-level" style="--level: {{ levels[forloop.index0] }}%; --delay: -{{ forloop.index | times: 370 }}ms"></span></span>
+    </span>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+  <div class="dsp-tabs">
+    <span class="is-active">GAIN</span><span>X-OVER</span><span>EQ</span><span>DELAY</span><span>LIMIT</span>
+  </div>
+</div>

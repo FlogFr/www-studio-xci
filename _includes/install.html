@@ -1,0 +1,20 @@
+{%- comment -%}
+  Install cards. install: [{id, name, formats, url, primary?}], commands: [..]
+  A platform without `url` shows "bientôt disponible" instead of a link.
+{%- endcomment -%}
+<div class="install">
+  {%- for p in include.platforms %}
+  {%- if p.url %}
+  <a class="install-card{% if p.primary %} is-primary{% endif %}" id="{{ p.id }}" href="{{ p.url }}">
+  {%- else %}
+  <div class="install-card{% if p.primary %} is-primary{% endif %}" id="{{ p.id }}">
+  {%- endif %}
+    <p class="install-name">{{ p.name }}</p>
+    <p class="install-formats">{% if p.formats %}{{ p.formats }}{% else %}Bientôt disponible{% endif %}</p>
+  {%- if p.url %}</a>{% else %}</div>{% endif %}
+  {%- endfor %}
+</div>
+{%- if include.commands %}
+<pre class="terminal"><code>{% for cmd in include.commands %}<span class="prompt" aria-hidden="true">$ </span>{{ cmd | xml_escape }}
+{% endfor %}</code></pre>
+{%- endif %}
