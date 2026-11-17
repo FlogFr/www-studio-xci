@@ -1,8 +1,10 @@
 # Code rules
 
-- Stay inside what the GitHub Pages native build supports: Jekyll 3.x, Liquid
-  4, kramdown (GFM) and the whitelisted plugins only. No custom Ruby plugins,
-  no build step, no GitHub Actions unless the user asks.
+- Stay inside what the GitHub Pages Jekyll build supports: Jekyll 3.x, Liquid
+  4, kramdown (GFM) and the whitelisted plugins only. No custom Ruby plugins
+  and no extra build step: `.github/workflows/pages.yml` only runs the official
+  `actions/jekyll-build-pages` and deploys. Change that workflow only when the
+  user asks.
 - No JavaScript unless a feature cannot work without it. Pages must be fully
   readable with JS off.
 - CSS lives in `assets/css/main.css`. Colours, fonts and type treatment come
