@@ -1,0 +1,202 @@
+[
+ {
+  "w": 2400,
+  "h": 1650,
+  "out": "rendu-3-4.png",
+  "fov": 22,
+  "cam": [
+   -700,
+   280,
+   1350
+  ],
+  "target": [
+   0,
+   -15,
+   170
+  ],
+  "front": 1.1,
+  "key": [
+   -700,
+   900,
+   1000
+  ],
+  "parts": [
+   {
+    "stl": "/stl/assemble.stl",
+    "color": "#d9d5cd",
+    "edges": 35
+   },
+   {
+    "cylinder": [
+     90,
+     87
+    ],
+    "color": "#262626",
+    "metal": 0.7,
+    "rough": 0.35,
+    "pos": [
+     0,
+     0,
+     -44
+    ]
+   },
+   {
+    "cylinder": [
+     40,
+     30
+    ],
+    "color": "#3a3a3a",
+    "metal": 0.6,
+    "rough": 0.4,
+    "pos": [
+     0,
+     0,
+     -102
+    ]
+   }
+  ]
+ },
+ {
+  "w": 2400,
+  "h": 1650,
+  "out": "rendu-arriere.png",
+  "fov": 22,
+  "cam": [
+   780,
+   380,
+   -950
+  ],
+  "target": [
+   0,
+   -10,
+   110
+  ],
+  "front": 0.8,
+  "key": [
+   700,
+   900,
+   -900
+  ],
+  "parts": [
+   {
+    "stl": "/stl/assemble.stl",
+    "color": "#d9d5cd",
+    "edges": 35
+   }
+  ]
+ },
+ {
+  "w": 2400,
+  "h": 1650,
+  "out": "eclate.png",
+  "fov": 22,
+  "cam": [
+   -560,
+   300,
+   1350
+  ],
+  "target": [
+   0,
+   0,
+   150
+  ],
+  "front": 1.0,
+  "key": [
+   -700,
+   900,
+   1000
+  ],
+  "parts": [
+   {
+    "stl": "/stl/q-tr.stl",
+    "color": "#f2a93b",
+    "edges": 35,
+    "pos": [
+     55,
+     45,
+     0
+    ]
+   },
+   {
+    "stl": "/stl/q-bl.stl",
+    "color": "#f2a93b",
+    "edges": 35,
+    "pos": [
+     -55,
+     -45,
+     0
+    ]
+   },
+   {
+    "stl": "/stl/q-tl.stl",
+    "color": "#d9d5cd",
+    "edges": 35,
+    "pos": [
+     -55,
+     45,
+     0
+    ]
+   },
+   {
+    "stl": "/stl/q-br.stl",
+    "color": "#d9d5cd",
+    "edges": 35,
+    "pos": [
+     55,
+     -45,
+     0
+    ]
+   }
+  ]
+ },
+ {
+  "w": 2400,
+  "h": 1650,
+  "out": "impression.png",
+  "fov": 22,
+  "cam": [
+   -430,
+   430,
+   520
+  ],
+  "target": [
+   110,
+   75,
+   -66
+  ],
+  "front": 0.8,
+  "key": [
+   -500,
+   1000,
+   700
+  ],
+  "ground": false,
+  "parts": [
+   {
+    "stl": "/stl/print-A.stl",
+    "color": "#f2a93b",
+    "edges": 35,
+    "rot": [
+     -90,
+     0,
+     0
+    ]
+   },
+   {
+    "box": [
+     256,
+     6,
+     256
+    ],
+    "color": "#2e2e2e",
+    "metal": 0.5,
+    "rough": 0.5,
+    "pos": [
+     110,
+     -3,
+     -66
+    ]
+   }
+  ]
+ }
+]

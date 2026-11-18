@@ -8,3 +8,11 @@ Gemfile.lock
 
 # Design export archive: duplicate of design/*.png
 design/*.zip
+
+# Horn renders: npm and STL inputs
+scripts/pavillon/render/node_modules
+scripts/pavillon/render/package-lock.json
+scripts/pavillon/render/stl/
+scripts/pavillon/render/*.png
+scripts/pavillon/out/
+scripts/pavillon/__pycache__/

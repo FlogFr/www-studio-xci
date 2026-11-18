@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#1c1c1c;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from "three";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
+const P = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+const W = P.w, H = P.h;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(P.bg || "#1c1c1c");
+scene.add(new THREE.HemisphereLight(0xffffff, 0x303030, 1.1));
+const key = new THREE.DirectionalLight(0xffffff, 2.4);
+key.position.set(...(P.key || [-500, 700, 900])); key.castShadow = true;
+key.shadow.mapSize.set(4096, 4096); key.shadow.bias = -0.0004; key.shadow.normalBias = 0.6;
+Object.assign(key.shadow.camera, { left: -700, right: 700, top: 700, bottom: -700, near: 10, far: 4000 });
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xffe2a8, 0.7); fill.position.set(700, 200, 300); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffffff, 0.8); rim.position.set(200, 300, -900); scene.add(rim);
+if (P.front) { const f = new THREE.DirectionalLight(0xffffff, P.front); f.position.set(...P.cam); scene.add(f); }
+const loader = new STLLoader();
+const group = new THREE.Group(); scene.add(group);
+const load = (url) => new Promise((ok, ko) => loader.load(url, ok, undefined, ko));
+for (const part of P.parts) {
+  let geo;
+  if (part.stl) geo = await load(part.stl);
+  else if (part.cylinder) { const [r, h] = part.cylinder; geo = new THREE.CylinderGeometry(r, r, h, 96); geo.rotateX(Math.PI / 2); }
+  else if (part.box) { geo = new THREE.BoxGeometry(...part.box); }
+  const mat = new THREE.MeshStandardMaterial({ color: part.color, roughness: part.rough ?? 0.62, metalness: part.metal ?? 0.0, flatShading: false });
+  geo.computeVertexNormals();
+  const mesh = new THREE.Mesh(geo, mat); mesh.castShadow = true; mesh.receiveShadow = true;
+  if (part.rot) mesh.rotation.set(...part.rot.map(d => d * Math.PI / 180));
+  if (part.pos) mesh.position.set(...part.pos);
+  group.add(mesh);
+  if (part.edges) {
+    const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo, part.edges), new THREE.LineBasicMaterial({ color: part.edgeColor || 0x111111, transparent: true, opacity: 0.55 }));
+    e.rotation.copy(mesh.rotation); e.position.copy(mesh.position); group.add(e);
+  }
+}
+// horn axis is +z (mouth); world: y up. Rotate the whole group so the horn looks at the camera.
+group.rotation.set(...(P.groupRot || [0, 0, 0]).map(d => d * Math.PI / 180));
+if (P.ground !== false) {
+  const box = new THREE.Box3().setFromObject(group);
+  const g = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), new THREE.ShadowMaterial({ opacity: 0.35 }));
+  g.rotation.x = -Math.PI / 2; g.position.y = box.min.y - 0.5; g.receiveShadow = true; scene.add(g);
+}
+const cam = new THREE.PerspectiveCamera(P.fov || 30, W / H, 10, 20000);
+cam.position.set(...P.cam); cam.lookAt(...(P.target || [0, 0, 0]));
+renderer.render(scene, cam);
+document.title = "done";
+</script></body></html>

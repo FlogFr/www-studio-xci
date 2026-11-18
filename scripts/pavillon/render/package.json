@@ -1,0 +1,8 @@
+{
+  "name": "pavillon-render",
+  "private": true,
+  "description": "Offline three.js renders of the printed horn (headless Chromium via Playwright).",
+  "dependencies": {
+    "three": "0.170.0"
+  }
+}

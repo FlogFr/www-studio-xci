@@ -27,3 +27,8 @@
   from the project's repository (README, docs, code), never from memory.
 - Name UI elements in italics. When the screenshots are in English, give the
   French label first and the English one in parentheses: *Console* (*Mixer*).
+- Prices: name the shop, the price and the month it was read, link the
+  listing, and say prices move. Never quote a price without a source.
+- Figures computed for an article (charts, simulation results, drawings, 3D
+  files) state their method and limits next to them, and every number in the
+  text matches the published files.

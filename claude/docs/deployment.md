@@ -58,3 +58,22 @@ live elsewhere (the existing cards use DejaVu Sans Bold for the titles).
   `meredsp206 --demo --page mixer` (or `--page channel --channel out1`). Wait
   ~12 s for the start-up toast to go, grab the 1781 × 900 window with
   `import -window root` + crop, resize to 1600 px wide WebP (`-quality 85`).
+
+### Horn article (charts, plan, renders, STL)
+
+Everything comes from `scripts/pavillon/` (Python; dependencies and commands
+in its README). The BEM results are kept in `scripts/pavillon/results/*.npz`
+so the charts can be redrawn without re-running the simulation (~1 h on 4
+cores for the retained design, 1/6 octave plus the 6.3–10 kHz points).
+
+- Charts and plan: `python3 plots.py` and `python3 plan.py` into
+  `assets/img/pavillon/` (WebP, 1600 px); the plan also writes the 1:1 baffle
+  template `gabarit-baffle.svg`, copied to `assets/files/pavillon/`.
+- STL: `python3 cad.py <design> out/`, then zip the two quadrants (A and B)
+  into `assets/files/pavillon/pavillon-80x40-stl.zip`. The assembled STL is
+  only used for the renders and is not published.
+- Renders: `scripts/pavillon/render/` (three.js 0.170.0 from npm, in the
+  pre-installed headless Chromium through Playwright): `python3 export.py`
+  writes the STL inputs, `python3 -m http.server 8765` serves the folder,
+  `node shoot.js views.json` renders at 2400 × 1650, `python3 finish.py
+  ../../../assets/img/pavillon` crops and saves 1600 × 1100 WebP.

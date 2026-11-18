@@ -21,7 +21,9 @@ set and is git-ignored.
 
 The seven blank files were exported empty: those pages were designed in code,
 extending the identities of the three article mockups. Re-exported files must
-be viewed and this table updated.
+be viewed and this table updated. The horn article
+(`/son/pavillon-directivite-constante/`) has no mockup: it reuses the I Son
+article components, with a render as hero image.
 
 ### Viewing a mockup
 
@@ -88,6 +90,20 @@ III, IV and V are code-side designs, pending real mockups.
 - Install cards can carry a `note` line under the formats.
 - Tables are real table boxes (header and body columns aligned, full width);
   under 720 px they become horizontally scrollable blocks.
+- Figures (`shots.html`, `kind: figure`): charts, renders and drawings in a
+  1 px `--line` frame, mono caption; two figures share a row (one column under
+  720 px). A render or photo can be the hero (`hero_visual: image`).
+- Charts (horn article) are WebP images drawn by `scripts/pavillon/` in the
+  I · Son colours: `#1c1c1c` surface, Barlow labels, JetBrains Mono numbers.
+  Data series take the first three slots of the validated dark categorical
+  palette (`#3987e5` blue, `#d95926` orange, `#199e70` aqua; the brand amber
+  and green fail its lightness band), the site amber marks annotations (the
+  800 Hz line), polar maps use a single amber ramp with the −6 dB contour in
+  ink. Every chart has its numbers in a table next to it.
+- Technical drawings follow first-angle projection (ISO E, the French
+  convention): front view, side section on its right, top section below.
+- 3D renders (three.js, offline): printed parts in light grey, the second
+  part type in amber, the driver as a dark schematic cylinder.
 
 ## Deliberate differences from the mockups
 

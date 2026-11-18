@@ -127,10 +127,12 @@ Le système complet est impressionnant, mais il ne passe pas partout. L'idée es
 de pouvoir sortir une version allégée : uniquement des têtes et des subs.
 
 - **Des têtes 2 × 12″ bi-amplifiées.** Je garde mes deux Eminence ME-12/300 et
-  j'y ajoute un moteur à compression sur un pavillon que je dessine moi-même —
-  c'est le [projet pavillon](/son/pavillon-directivite-constante/).
-- **Moins de poids, plus de rendement.** Les JBL 2482 et leur pavillon
-  pourraient être revendus pour financer les nouvelles têtes.
+  j'y ajoute un seul moteur à compression, un B&C DE750TN, sur un pavillon
+  80° × 40° que j'ai calculé et dessiné pour l'impression 3D — c'est le
+  [projet pavillon](/son/pavillon-directivite-constante/).
+- **Moins de poids, plus de rendement.** Ce moteur remplace à la fois le JBL
+  2482 et les tweeters HF50 : les 2482 et leur pavillon pourraient être
+  revendus pour financer les nouvelles têtes.
 - **Plus d'infra.** Remplacer les 15 pouces des W-bins pour aller chercher
   encore plus bas.
 

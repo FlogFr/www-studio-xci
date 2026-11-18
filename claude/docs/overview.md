@@ -9,7 +9,7 @@ each with its own visual identity.
 
 | # | Universe | Slug | Content | Main audience |
 |---|----------|------|---------|---------------|
-| I | Son | `/son/` | MereDSP206 app, the sound system, the constant-directivity horn project | Public / DJs / DSP 206 owners — MereDSP206 is promoted |
+| I | Son | `/son/` | MereDSP206 app, the sound system, the constant-directivity horn (B&C DE750TN on a 3D-printed OS-SE waveguide) | Public / DJs / DSP 206 owners — MereDSP206 is promoted |
 | II | Logiciel | `/logiciel/` | Free software, Linux, infrastructure, *The Art Of Kubernetes* book, Infratelier | Tech peers, recruiters, training clients |
 | III | Motion | `/motion/` | Blender, 2D/3D animation, renders | Portfolio |
 | IV | Web | `/web/` | Websites made for friends, associations and own projects | Professional references (LinkedIn) |

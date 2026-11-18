@@ -1,0 +1,11 @@
+{%- comment -%}
+  Hero image (a render or a photo) from `page.hero_image` {src, w, h, alt, caption}.
+  Above the fold: not lazy-loaded.
+{%- endcomment -%}
+{%- assign im = page.hero_image -%}
+<figure class="hero-image">
+  <img src="{{ im.src | relative_url }}" alt="{{ im.alt | escape }}" width="{{ im.w }}" height="{{ im.h }}" fetchpriority="high" decoding="async">
+  {%- if im.caption %}
+  <figcaption>{{ im.caption }}</figcaption>
+  {%- endif %}
+</figure>

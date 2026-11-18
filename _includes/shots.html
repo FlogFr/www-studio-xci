@@ -1,7 +1,8 @@
 {%- comment -%}
-  Screenshots taken from `page.shots` (a hash of {src, w, h, alt, caption, kind}).
+  Screenshots and figures taken from `page.shots` (a hash of {src, w, h, alt, caption, kind}).
   names: comma-separated keys of page.shots, e.g. "linux-mixer,console".
-  kind: "phone" (rounded device frame, the default) or "desktop" (window frame).
+  kind: "phone" (rounded device frame, the default), "desktop" (window frame)
+  or "figure" (a chart, a render or a drawing: plain 1 px frame).
   side: true floats a single phone shot beside the text (stacks on small screens).
   Several names render as a row: a desktop shot takes the wide column.
   Each image links to its full-size file (no JS lightbox).

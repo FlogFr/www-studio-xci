@@ -23,13 +23,18 @@ _includes/
   features.html rack.html signal-chain.html install.html     ← content blocks
   terminal.html shots.html                                   ← content blocks
   visual-dsp.html visual-stacks.html visual-horn.html visual-book.html  ← hero visuals
+  visual-image.html                                          ← hero render / photo
+                       (visual-horn.html is also included in the horn article body)
 _son/ _logiciel/ _motion/ _others/     one collection per universe (articles)
 son/ logiciel/ motion/ web/ others/    index.md of each universe (layout: universe)
 index.md  404.html  robots.txt  CNAME  favicon.ico
 assets/css/main.css    all styles (tokens per universe, see design.md)
 assets/img/            favicon.svg, favicon-32.png, apple-touch-icon.png, logo.png, og/*.png
-assets/img/<project>/  a project's own images (meredsp206/: icon, screenshots)
+assets/img/<project>/  a project's own images (meredsp206/: icon, screenshots;
+                       pavillon/: charts, plan, renders)
+assets/files/<project>/ downloadable files (pavillon/: STL zip, baffle template SVG)
 scripts/make-images.sh regenerates favicon/logo/og images (ImageMagick)
+scripts/pavillon/      horn geometry, BEM simulation, charts, plan, STL (Python, see its README)
 Gemfile Makefile .claude/launch.json   local preview tooling
 ```
 
@@ -63,7 +68,8 @@ Excluded from the build: `CLAUDE.md`, `claude/`, `design/`, `scripts/`,
 | `image` | Social card, when the project has its own (default: the universe's) |
 | `date`, `order` | Publication date (latest list) and order inside the universe |
 | `status` | e.g. "En cours", shown on cards |
-| `hero_visual` | `dsp`, `stacks`, `horn`, `book` → `_includes/visual-<name>.html` |
+| `hero_visual` | `dsp`, `stacks`, `horn`, `book`, `image` → `_includes/visual-<name>.html` |
+| `hero_image` | `{src, w, h, alt, caption}` for `hero_visual: image` (a render or a photo) |
 | `hero_layout` | `split` (default), `split-narrow`, `wide` (visual under the text) |
 | `header_cta`, `ctas` | Header button / hero buttons (`label`, `url`, `icon`, `style`) |
 | `facts`, `facts_title`, `facts_style` | Aside box (`label`, `value`, `url`); `facts_style: stats` = big numbers |
@@ -80,8 +86,9 @@ Any other key can feed a content include, e.g. `features`, `rack`, `chain`,
 - `terminals`: named lists of shell lines →
   `{% include terminal.html commands=page.terminals.linux_build %}`. The `$`
   prompt is not selectable; a line starting with `#` is a comment.
-- `shots`: named screenshots `{src, w, h, alt, caption, kind}` (`kind`:
-  `phone`, the default, or `desktop`) →
+- `shots`: named screenshots or figures `{src, w, h, alt, caption, kind}`
+  (`kind`: `phone`, the default, `desktop`, or `figure` for a chart, a render
+  or a drawing; two figures side by side share the row) →
   `{% include shots.html names="linux-mixer,console" %}` for a row, or
   `names="console" side=true` to float one phone beside the text (stacked
   under 720 px). Each image links to its full-size file.

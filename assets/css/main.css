@@ -289,9 +289,11 @@ a.install-card:hover { outline: 2px solid var(--ink); }
 .shot img { width: 100%; height: auto; }
 .shot-phone img { border: 6px solid var(--surface-2); border-radius: 26px; box-shadow: 0 0 0 1px var(--line); background: var(--surface); }
 .shot-desktop img { border: 1px solid var(--line); border-radius: 10px; }
+.shot-figure img { border: 1px solid var(--line); }
 .prose .shot figcaption { margin-top: 12px; }
 .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 230px)); gap: 20px; align-items: start; }
 .shots:has(.shot-desktop) { grid-template-columns: minmax(0, 3.2fr) minmax(0, 1fr); }
+.shots:has(.shot-figure) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .shot-side { float: right; width: min(250px, 38%); margin: .35em 0 1.4em 36px !important; }
 .prose h2 { clear: both; }
 
@@ -329,6 +331,8 @@ a.install-card:hover { outline: 2px solid var(--ink); }
 .sv-rack-title { fill: var(--ink); }
 
 .horn-figure { border: 1px solid var(--line); background: var(--surface); padding: 20px; }
+.hero-image img { width: 100%; border: 1px solid var(--line); }
+.hero-image figcaption { margin-top: 12px; font: 13px/1.5 var(--font-mono); color: var(--muted); }
 .horn-beam { fill: var(--accent); fill-opacity: .16; stroke: var(--accent); stroke-width: 2; }
 .horn-angle { fill: var(--ink); font-family: var(--font-display); font-weight: var(--display-weight); font-size: 52px; }
 
@@ -649,7 +653,7 @@ body[data-universe="others"] { background-attachment: fixed; }
   .prose table { display: block; overflow-x: auto; }
   .shot-side { float: none; width: min(260px, 100%); margin: 1.1em auto 0 !important; }
   .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .shots:has(.shot-desktop) { grid-template-columns: minmax(0, 1fr); }
+  .shots:has(.shot-desktop), .shots:has(.shot-figure) { grid-template-columns: minmax(0, 1fr); }
   .shots:has(.shot-desktop) .shot-phone { width: min(260px, 100%); justify-self: center; }
   .chain-flow { flex-direction: column; align-items: stretch; }
   .chain-box { white-space: normal; }

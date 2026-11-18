@@ -18,3 +18,7 @@
 - Accessibility: semantic landmarks, visible focus, colour contrast ≥ 4.5:1 for
   text, decorative visuals `aria-hidden="true"`, honour `prefers-reduced-motion`.
 - Layout must work from 320 px wide, with no horizontal scroll.
+- Generated assets (charts, plans, renders, STL) come from scripts under
+  `scripts/<project>/` and are never edited by hand: change the script or its
+  parameters, rerun it, and commit the script, its inputs/results and the
+  outputs together. Charts are static WebP images, never JS on the page.
