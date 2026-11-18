@@ -4,7 +4,7 @@ card_title: Un pavillon à directivité constante
 headline: "Un pavillon 80°&nbsp;×&nbsp;40° imprimé en 3D"
 description: >-
   Remplacer JBL 2482 et tweeters par un moteur B&C DE750 sur un pavillon
-  80° × 40° coupé à 800 Hz : calculs, simulation BEM, moteur et STL à imprimer.
+  80° × 40° coupé vers 1 kHz : calculs, simulation BEM, puissance, STL à imprimer.
 lede: >-
   Pour les têtes de ma sono, je remplace le JBL 2482 et les deux tweeters par
   un seul moteur à compression, chargé par un pavillon que j'ai calculé,
@@ -29,11 +29,12 @@ ctas:
 facts:
   - { label: Statut, value: "Conçu et simulé, prototype à imprimer" }
   - { label: Couverture simulée, value: "≈ 70° (H) de 1 à 6 kHz · ≈ 45° (V) dès 3 kHz" }
-  - { label: Coupure, value: "800 Hz, filtrée par le DSP 206" }
+  - { label: Coupure, value: "800 Hz – 1,2 kHz au DSP 206, 1,2 kHz conseillé", url: "#coupure" }
   - { label: Moteur, value: "B&C DE750TN-8, gorge 2″", url: "#moteur" }
   - { label: Bouche, value: "410 × 237 mm (bride 438 × 265 mm)" }
   - { label: Profondeur, value: "195 mm, gorge 2″ (50,8 mm)" }
   - { label: Impression, value: "4 pièces par pavillon, sans support" }
+  - { label: Niveau max, value: "≈ 128 dB à 1 m par moteur (110 W)", url: "#puissance" }
   - { label: Budget, value: "≈ 520 € les deux moteurs" }
 shots:
   keele:
@@ -71,6 +72,13 @@ shots:
     h: 880
     alt: "Carte de directivité verticale simulée : la courbe à −6 dB part de ±65° à 800 Hz, se resserre à ±22° vers 3 kHz et reste entre ±18° et ±26° jusqu'à 10 kHz"
     caption: "Directivité verticale simulée, niveau relatif à l'axe ; trait blanc : −6 dB"
+  raccord:
+    src: /assets/img/pavillon/raccord.webp
+    kind: figure
+    w: 1600
+    h: 920
+    alt: "Largeur de faisceau du pavillon simulé et des deux 12 pouces superposés, en horizontal et en vertical, de 500 Hz à 5 kHz. À 1,2 kHz, le 12 pouces rayonne 101° en horizontal pour 68° au pavillon ; en vertical, la paire de 12 pouces tient 32° quand le pavillon rayonne 98°"
+    caption: "Directivité autour de la coupure : traits pleins, pavillon (BEM) ; tirets, 2 × 12″ superposés à 33 cm (modèle de pistons)"
   impedance:
     src: /assets/img/pavillon/impedance.webp
     kind: figure
@@ -158,7 +166,7 @@ Cahier des charges
 |---------|-------|
 | Couverture horizontale | 80° |
 | Couverture verticale | 40° |
-| Coupure basse | 800 Hz, filtrée par le DSP 206 |
+| Coupure basse | 800 Hz visés, 1,2 kHz possible, filtrée par le DSP 206 |
 | Haut du spectre | jusqu'à l'aigu, sans tweeter |
 | Moteur | un seul, gorge 2″ |
 | Fabrication | imprimable en 3D, sans support |
@@ -199,6 +207,7 @@ Appliquée au cahier des charges :
 |---------|---------------|---------------|
 | 800 Hz | ≈ 0,40 m | ≈ 0,79 m |
 | 1 kHz | ≈ 0,32 m | ≈ 0,64 m |
+| 1,2 kHz | ≈ 0,26 m | ≈ 0,53 m |
 
 {% include shots.html names="keele" %}
 
@@ -485,6 +494,169 @@ en vertical : un calcul simple à deux sources donne environ 50° à 800 Hz et
 12″ ; au-dessus de 3 kHz, par le pavillon. Entre les deux, la tête rayonne plus
 large en hauteur, comme la plupart des enceintes deux voies compactes.
 
+## 800 Hz ou 1,2 kHz ? {#coupure}
+
+Couper plus haut ne demande ni un autre moteur ni un autre pavillon : c'est un
+réglage du DSP. La question est de savoir où le passage entre les 12″ et le
+pavillon se fait le mieux.
+
+### Une coupure plus haute ne donne pas 40° plus bas {#quarante}
+
+La règle de Keele ne bouge pas : pour tenir 40° jusqu'à 1,2 kHz, il faudrait
+encore une bouche de 53 cm de haut, plus du double de la nôtre. À 1,2 kHz, le
+pavillon simulé rayonne 68° × 98°. Il tient ses 40° à partir de 3 kHz, quelle
+que soit la coupure.
+
+Ce qui change, c'est qui joue entre 800 Hz et 1,2 kHz : le pavillon, ou les
+deux 12″. Et les deux 12″ superposés ont leur propre directivité.
+
+{% include shots.html names="raccord" %}
+
+Directivité à la coupure
+{: .table-label}
+
+| Coupure | Pavillon H · V (BEM) | 2 × 12″ superposés H · V (modèle) |
+|---------|----------------------|-----------------------------------|
+| 800 Hz | 89° · 129° | plus de 180° · 49° |
+| 1,2 kHz | 68° · 98° | 101° · 32° |
+
+- **En horizontal, le raccord est bien meilleur à 1,2 kHz.** Un 12″ s'y est
+  déjà resserré à une centaine de degrés, proche des 68° du pavillon. À
+  800 Hz, il rayonne encore sur tout le demi-espace devant lui, pour 89° côté
+  pavillon : sur les côtés de la piste, le médium change de couleur au
+  passage d'une voie à l'autre.
+- **En vertical, les 12″ tiennent la verticale plus longtemps.** Superposés,
+  ils forment une petite colonne qui donne 49° à 800 Hz, 39° à 1 kHz et 32° à
+  1,2 kHz. Couper à 1,2 kHz laisse cette colonne travailler une demi-octave de
+  plus : la zone où la tête rayonne large en hauteur se réduit à
+  1,2 – 3 kHz, au lieu de 0,8 – 3 kHz.
+- **Le passage reste brusque en vertical** dans les deux cas : de 30 à 50° côté
+  12″ à 100° et plus côté pavillon. C'est le compromis d'une tête deux voies
+  compacte ; le garder court, c'est aussi coller le pavillon au 12″ du haut.
+
+Le modèle des 12″ est simple — deux pistons de 26 cm dans un baffle infini, à
+33 cm d'entraxe — mais il suffit pour comparer les tendances. Les vraies
+valeurs viendront de la mesure de la tête.
+
+### Le moteur respire {#marge}
+
+Le DE750TN est donné pour 800 Hz : il tient les deux coupures. Mais à 800 Hz,
+pour le même niveau, sa membrane bouge **environ deux fois plus** qu'à
+1,2 kHz : une fois et demie parce que la fréquence est plus basse (le
+déplacement varie comme 1/f), et encore 1,4 fois parce que le pavillon la
+charge moins bien (résistance de 0,64 au lieu de 1,19, et la vitesse varie
+comme 1/√R). Couper à 1,2 kHz, c'est 6 dB de marge sur le déplacement de la
+membrane, et le gros de l'énergie des voix laissé aux 12″.
+
+### Et le prix ? {#prix}
+
+Un moteur fait pour une coupure plus haute peut être plus petit et moins cher,
+mais il faut alors redessiner le pavillon pour sa gorge.
+
+Moteurs selon la coupure
+{: .table-label}
+
+| Coupure | Moteur | Gorge | Sensibilité | Puissance | Prix relevé |
+|---------|--------|-------|-------------|-----------|-------------|
+| 800 Hz | **B&C DE750TN-8** (retenu) | 2″ | 107,5 dB | 110 W | ≈ 260 € |
+| 1,2 kHz | B&C DE780TN-16 | 1,4″ | 109 dB | 110 W (fiche 8 Ω) | ≈ 230 – 240 € |
+| 1,6 kHz | B&C DE250-8 | 1″ | 108,5 dB | 60 W | ≈ 92 – 99 € |
+
+Le DE780TN, donné pour 1,2 kHz minimum, n'économise que 20 à 30 € par
+moteur, au prix d'un nouveau pavillon. La vraie économie, c'est un moteur
+1 pouce comme le DE250 : près de trois fois moins cher, mais coupé à 1,6 kHz, avec
+presque deux fois moins de puissance, et des 12″ qui devraient monter
+proprement jusqu'à 3 kHz. Pour un système qui doit envoyer, ce n'est pas le
+bon calcul.
+
+Prix relevés en novembre 2026 : DE780TN 16 Ω à 192,44 € HT chez
+[Thomann](https://www.thomann.co.uk/bc_de780tn_16_ohms.htm) et 238 € TTC chez
+[SonoVente](https://www.sonovente.com/b-and-c-de-780-tn-16-ohms-p92174.html) ;
+DE250 à 92 € chez [Thomann](https://www.thomann.de/be/bc_de_250.htm) et
+99 € chez Muziker. Ils bougent : à vérifier avant de commander.
+
+### Ce que je retiens {#choix-coupure}
+
+Je garde le DE750TN et ce pavillon, et je pars d'une **coupure à 1,2 kHz**
+(Linkwitz-Riley 24 dB/octave). Je redescendrai vers 1 kHz ou 800 Hz si les 12″
+ne restent pas propres jusqu'à 2,4 kHz, ou si le raccord mesuré est meilleur
+plus bas. Rien à racheter : tout se règle dans
+[MereDSP206](/son/meredsp206/).
+
+## Avec les deux 12″ {#douze-pouces}
+
+Le but de tout ce projet : remplacer l'empilement du haut de la sono — 2482,
+tweeters, filtre passif — par une seule voie plus simple, sans perdre en
+qualité ni en niveau. Il faut donc que le moteur et les 12″ arrivent au même
+niveau maximal : sinon, c'est la voie la plus faible qui fixe la limite.
+
+### Sensibilité et puissance {#puissance}
+
+La sensibilité est le niveau mesuré à 1 m pour 1 W. Doubler la puissance
+ajoute 3 dB ; deux haut-parleurs identiques qui jouent ensemble ajoutent 6 dB
+à puissance égale par haut-parleur. D'où des niveaux maximaux, à 1 m dans
+l'axe, en ordre de grandeur :
+
+Niveau maximal par tête
+{: .table-label}
+
+| Voie | Sensibilité (1 W, 1 m) | Puissance | Niveau max à 1 m |
+|------|------------------------|-----------|------------------|
+| Moteur B&C DE750TN | 107,5 dB | 110 W nominal (220 W en programme) | ≈ 128 dB (≈ 131 dB) |
+| 2 × Eminence ME-12/300 actuels | non trouvée | 2 × 300 W | sensibilité + 31 dB |
+| 2 × B&C 12NDL76 | 100 dB | 2 × 400 W | ≈ 132 dB |
+| 2 × FaitalPRO 12PR320 | 97 dB | 2 × 300 W | ≈ 128 dB |
+
+Le moteur plafonne vers **128 dB à 1 m**. Pour le suivre, la paire de 12″ doit
+avoir une sensibilité d'au moins 97 dB avec 2 × 300 W. À 10 m, en champ libre,
+il faut retirer 20 dB : environ 108 dB par tête, avant de compter la
+deuxième tête et le sol.
+
+Deux réserves. La sensibilité du moteur est celle de la fiche B&C, mesurée sur
+son propre pavillon : sur celui-ci, elle sera à mesurer, à quelques décibels
+près. Et la remontée d'aigu propre aux pavillons à directivité constante mange
+une partie de la marge au-dessus de 5 kHz, là où la musique a peu d'énergie.
+
+À tension égale, le moteur (107,5 dB à 2,83 V sous 8 Ω) est un peu plus
+sensible que la paire de 12″ (sensibilité d'un 12″ + 6 dB à 2,83 V sous 4 Ω,
+soit 103 à 106 dB) : sa sortie sera atténuée de quelques décibels dans le DSP,
+ce qui lui laisse de la réserve. L'Ecler APA1000 doit fournir 110 W sous 8 Ω
+sur une voie et 600 W sous 4 Ω sur l'autre : c'est à vérifier sur sa fiche.
+
+### Ce qu'il faut aux 12″ {#compatibilite}
+
+| Critère | Coupure à 800 Hz | Coupure à 1,2 kHz |
+|---------|------------------|-------------------|
+| Réponse propre jusqu'à | ~1,6 kHz | ~2,4 kHz |
+| Sensibilité | 97 dB ou plus | 97 dB ou plus |
+| Puissance | 2 × 300 W ou plus | 2 × 300 W ou plus |
+| Montage | superposés, pavillon au-dessus, au plus près | idem |
+
+Une octave au-dessus de la coupure, le filtre Linkwitz-Riley n'a retiré que
+24 dB : ce que le 12″ fait là s'entend encore, d'où la colonne « réponse propre
+jusqu'à ».
+
+Je n'ai pas trouvé de fiche publique des Eminence ME-12/300 : leur
+sensibilité et leur limite haute sont à mesurer, ou à retrouver sur leur
+étiquette. S'ils atteignent 97 dB et montent proprement à 2,4 kHz, ils
+restent. Sinon, deux 12″ du commerce collent à ce cahier des charges :
+
+12″ compatibles
+{: .table-label}
+
+| 12″ | Sensibilité | Bande | Puissance | Prix relevé | Coupure possible |
+|-----|-------------|-------|-----------|-------------|------------------|
+| B&C 12NDL76-8 | 100 dB | 50 Hz – 2 kHz | 400 W (800 W en programme) | ≈ 199 € | 800 Hz – 1 kHz |
+| FaitalPRO 12PR320-8 | 97 dB | 45 Hz – 5 kHz | 300 W | ≈ 193 – 235 € | jusqu'à 1,2 kHz |
+
+Le B&C est le plus sensible, mais sa bande annoncée s'arrête à 2 kHz : il va
+avec une coupure vers 1 kHz. Le Faital monte plus haut et accepte 1,2 kHz,
+pour 3 dB de sensibilité en moins. Prix relevés en novembre 2026 : 199 € chez
+[Thomann](https://www.thomann.de/gb/bc_12_ndl_76.htm) pour le 12NDL76 ;
+193 € en promotion et 229 € au prix normal chez
+[Masori](https://masori.de/en/products/12pr320), 234,95 € chez Soundimports
+pour le 12PR320. À vérifier avant de commander.
+
 ## Imprimer et assembler {#fabrication}
 
 Le pavillon est coupé en quatre quarts, le long de ses deux plans de symétrie.
@@ -569,9 +741,9 @@ Réglages de départ
 
 | Réglage | OUT 3·4 (2 × 12″) | OUT 5·6 (moteur) |
 |---------|-------------------|------------------|
-| Filtre | passe-bas Linkwitz-Riley 24 dB/oct, 800 Hz | passe-haut Linkwitz-Riley 24 dB/oct, 800 Hz |
+| Filtre | passe-bas Linkwitz-Riley 24 dB/oct, 1,2 kHz (800 Hz à 1,2 kHz selon les 12″) | passe-haut Linkwitz-Riley 24 dB/oct, même fréquence |
 | Délai | à régler : la membrane du moteur est à plus de 20 cm derrière le baffle | 0 |
-| Niveau | référence | atténué : le moteur sur pavillon est plus sensible que les 12″ |
+| Niveau | référence | atténué de quelques dB : le moteur est plus sensible que les 12″ ([détail](#puissance)) |
 | Égalisation | selon mesure | remontée progressive de l'aigu, typique d'un pavillon à directivité constante |
 | Limiteur | selon les 12″ | seuil vers 30 V efficaces en sortie d'ampli (110 W sous 8 Ω) |
 
@@ -590,8 +762,8 @@ niveau de sortie du DSP donne 30 V à la sortie de l'ampli, avec son gain régl�
 1. Imprimer un premier pavillon et vérifier l'ajustement du moteur.
 2. Mesurer ses polaires horizontales et verticales (micro de mesure et REW), et
    les comparer à la simulation.
-3. Régler la coupure et l'alignement avec les 12″ à la mesure, puis dessiner la
-   caisse de la tête autour.
+3. Mesurer les 12″ jusqu'à 2,4 kHz, choisir la coupure entre 800 Hz et 1,2 kHz,
+   régler l'alignement à la mesure, puis dessiner la caisse de la tête autour.
 4. Si la verticale doit être tenue plus bas, étudier une version plus profonde
    à fente de diffraction, imprimée en plus de morceaux.
 {: .numbered}

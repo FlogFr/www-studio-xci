@@ -8,6 +8,7 @@ Excluded from the Jekyll build (`scripts/` is in `exclude`).
 |------|------|
 | `horn.py` | OS-SE profile (`Horn` dataclass), Keele and Molloy formulas |
 | `designs.py` | the compared candidates and the retained design (`RETAINED`) |
+| `woofers.py` | piston model of the two stacked 12″ (directivity around the crossover) |
 | `mesh.py` | closed BEM body: horn in a rectangular box, symmetric rings |
 | `bem.py` | bempp-cl solver (Burton-Miller, dense LU): polars, DI, throat impedance → `results/<design>.npz` |
 | `plots.py` | article charts (WebP) from `results/` |
@@ -16,6 +17,13 @@ Excluded from the Jekyll build (`scripts/` is in `exclude`).
 | `style.py` | chart style (I · Son colours, Barlow / JetBrains Mono) |
 | `render/` | three.js renders: `export.py` (STL inputs), `index.html` + `shoot.js` + `views.json` (headless Chromium), `finish.py` (crop, WebP) |
 | `results/` | BEM results (`.npz`): retained design (1/6 octave + `-hf`), compared candidates (1/3 octave) |
+
+## Constraints
+
+- Printer bed 220 × 220 × 220 mm: a quadrant must stay within 220 × 220 mm
+  and 220 mm high (it is 219 × 133 × 195 mm).
+- Inner walls ≤ 50° from the axis (`max_angle`), so a quadrant prints
+  mouth-down without supports.
 
 ## Setup
 

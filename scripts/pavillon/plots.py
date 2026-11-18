@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 import style as st
+import woofers
 from horn import keele_dimension, keele_frequency
 from designs import DESIGNS, RETAINED, COMPARED
 
@@ -173,6 +174,32 @@ def fig_beamwidth(out, runs):
     return st.save(fig, out)
 
 
+def fig_raccord(out, res):
+    """Beamwidth of the horn (BEM) and of the two stacked 12-inch (piston model) around the crossover."""
+    fig, ax = plt.subplots(figsize=(8, 4.6))
+    f = res["freqs"]
+    keep = f <= 5100
+    fw = np.geomspace(500, 2600, 60)
+    for i, (key, plane, lab) in enumerate((("ph", "h", "horizontal"), ("pv", "v", "vertical"))):
+        ax.plot(f[keep], beamwidth(res[key], res["angles"])[keep], color=st.SERIES[i], marker="o", ms=4,
+                label=f"{lab} · pavillon (BEM)")
+        ax.plot(fw, [woofers.beamwidth(x, plane) for x in fw], color=st.SERIES[i], ls=(0, (5, 3)),
+                label=f"{lab} · 2 × 12″ superposés (modèle)")
+    for fc, lab in ((800, "800 Hz"), (1200, "1,2 kHz")):
+        ax.axvline(fc, color=st.AMBER, lw=1.2, ls=(0, (4, 3)))
+        ax.text(fc * 1.02, 172, lab, color=st.INK_SOFT, fontsize=12, va="top")
+    for t in (80, 40):
+        ax.axhline(t, color=st.MUTED, lw=1.0, ls=(0, (1, 3)))
+    st.hz_axis(ax, 500, 5100)
+    ax.set_ylim(0, 185)
+    ax.set_yticks(range(0, 181, 20))
+    ax.set_ylabel("Largeur à −6 dB (°)")
+    ax.legend(loc="upper right", fontsize=11.5, bbox_to_anchor=(1, 0.93))
+    st.mono_ticks(ax)
+    fig.tight_layout()
+    return st.save(fig, out)
+
+
 def fig_impedance(out, res):
     f, z = res["freqs"], res["z"]
     fig, ax = plt.subplots(figsize=(8, 4.2))
@@ -200,5 +227,6 @@ if __name__ == "__main__":
     print("polaire-v", fig_polar_map(out / "polaire-v.webp", r, "v", "Plan vertical"))
     print("largeur", fig_beamwidth(out / "largeur.webp", [("retenu", r, "-"), ("OS pur", load(cmp_name), (0, (5, 3)))]))
     print("impedance", fig_impedance(out / "impedance.webp", r))
+    print("raccord", fig_raccord(out / "raccord.webp", r))
     for name in (RETAINED, cmp_name, "flare-fort"):
         print(f"\n{name}\n" + table(load(name)))

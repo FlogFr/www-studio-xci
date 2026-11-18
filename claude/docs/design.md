@@ -99,7 +99,10 @@ III, IV and V are code-side designs, pending real mockups.
   palette (`#3987e5` blue, `#d95926` orange, `#199e70` aqua; the brand amber
   and green fail its lightness band), the site amber marks annotations (the
   800 Hz line), polar maps use a single amber ramp with the −6 dB contour in
-  ink. Every chart has its numbers in a table next to it.
+  ink. Every chart has its numbers in a table next to it. When a chart mixes
+  two sources (horn vs 12″), colour stays the plane (blue horizontal, orange
+  vertical) and the line style is the source: solid = simulated / retained,
+  dashed = model or compared design.
 - Technical drawings follow first-angle projection (ISO E, the French
   convention): front view, side section on its right, top section below.
 - 3D renders (three.js, offline): printed parts in light grey, the second
